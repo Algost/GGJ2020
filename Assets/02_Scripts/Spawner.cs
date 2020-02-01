@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         spawnTimerEnnemi -= Time.deltaTime;
-        Debug.Log("spawnTimerEnnemi : "+spawnTimerEnnemi);
+        //Debug.Log("spawnTimerEnnemi : "+spawnTimerEnnemi);
         if (spawnTimerEnnemi <= 0.0f && spawnTime < Time.time)
         {
             this.SpawnEnnemi();

@@ -385,7 +385,7 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabEnnemi
       value: 
-      objectReference: {fileID: 7178165223268336665, guid: 1e7299f59c5d297448111d2f27f7957b,
+      objectReference: {fileID: 2240327481639983746, guid: 1e7299f59c5d297448111d2f27f7957b,
         type: 3}
     - target: {fileID: 4219959084753460544, guid: b8cecae1417586e49a9ed31c2dfbdff5,
         type: 3}
@@ -481,7 +481,7 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabEnnemi
       value: 
-      objectReference: {fileID: 7178165223268336665, guid: 1e7299f59c5d297448111d2f27f7957b,
+      objectReference: {fileID: 2240327481639983746, guid: 1e7299f59c5d297448111d2f27f7957b,
         type: 3}
     - target: {fileID: 4219959084753460544, guid: b8cecae1417586e49a9ed31c2dfbdff5,
         type: 3}
@@ -759,7 +759,7 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabEnnemi
       value: 
-      objectReference: {fileID: 7178165223268336665, guid: 1e7299f59c5d297448111d2f27f7957b,
+      objectReference: {fileID: 2240327481639983746, guid: 1e7299f59c5d297448111d2f27f7957b,
         type: 3}
     - target: {fileID: 4219959084753460544, guid: b8cecae1417586e49a9ed31c2dfbdff5,
         type: 3}
@@ -914,6 +914,8 @@ GameObject:
   - component: {fileID: 1089871337}
   - component: {fileID: 1089871336}
   - component: {fileID: 1089871335}
+  - component: {fileID: 1089871339}
+  - component: {fileID: 1089871340}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -995,6 +997,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089871339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089871334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: c8f8e54c8f67c4e4598d4bd8e779b4e4,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1089871340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089871334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13501d86a06b5c9449e17c3601643dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1359193219 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5633287021298453788, guid: b8cecae1417586e49a9ed31c2dfbdff5,
@@ -1392,7 +1437,7 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabEnnemi
       value: 
-      objectReference: {fileID: 7178165223268336665, guid: 1e7299f59c5d297448111d2f27f7957b,
+      objectReference: {fileID: 2240327481639983746, guid: 1e7299f59c5d297448111d2f27f7957b,
         type: 3}
     - target: {fileID: 4219959084753460544, guid: b8cecae1417586e49a9ed31c2dfbdff5,
         type: 3}
