@@ -45,7 +45,7 @@ public class Repairable : MonoBehaviour, IRepairable
 
     private void Start()
     {
-        InitActions();
+        //InitActions();
         onOverHeat.Invoke();
     }
 
@@ -86,7 +86,7 @@ public class Repairable : MonoBehaviour, IRepairable
         m_repairActionsQueue.Enqueue(GetRandomAction());
     }
 
-    void InitActions()
+    public void InitActions()
     {
         m_repairActionsQueue.Clear();
         for (int i = 0; i < repairActionsCount; i++)
