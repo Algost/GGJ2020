@@ -1,31 +1,88 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Repairer : MonoBehaviour
 {
+    private bool playerInput = false;
+
+    private InputAction m_expectedAction;
+    private InputAction m_playerAction;
+
     public void StartRepair(IRepairable repairable)
     {
-        AsyncRepair(repairable).WrapErrors();
+        StartCoroutine("TryRepair", repairable);
     }
 
-    async Task AsyncRepair(IRepairable repairable)
+    private void CheckAction(InputAction.CallbackContext obj)
     {
-        repairable.StartRepair();
-        int repairCount = repairable.repairActionsCount;
-        for (int i = 0; i < repairCount; i++)
+        m_playerAction = obj.action;
+    }
+
+    IEnumerator TryRepair(IRepairable repairable)
+    {
+        PlayerInput playerInputs = GetComponent<PlayerInput>();
+        playerInputs.actions.AddActionMap(repairable.possibleActions);
+        InputActionMap actions = playerInputs.actions.actionMaps.Last();
+        actions.actionTriggered += CheckAction;
+
+        bool finished = false;
+        playerInput = false;
+        while (!finished)
         {
-            //await 
+            float timeout = 0;
+            while (timeout < repairable.actionTime)
+            {
+                yield return 0;
+                timeout += Time.deltaTime;
+                if (playerInput)
+                {
+                    playerInput = false;
+                    timeout = 0;
+                    if (m_playerAction == m_expectedAction)
+                    {
+                        if (OnExpectedSuccess(repairable))
+                        {
+                            finished = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        OnExpectedFail(repairable);
+                    }
+                }
+            }
+            if (!finished)
+                OnExpectedFail(repairable);
         }
+        actions.actionTriggered -= CheckAction;
+        playerInput.actions.RemoveActionMap(repairable.possibleActions);
     }
-}
 
-public static class ExtentionUtils
-{
-    public static async void WrapErrors(this Task task)
+    void OnExpectedFail(IRepairable repairable)
     {
-        await task;
+        repairable.CreateNewAction();
+        m_expectedAction = repairable.GetNextAction();
+        repairable.FailRepair();
+    }
+
+    bool OnExpectedSuccess(IRepairable repairable)
+    {
+        m_expectedAction = repairable.GetNextAction();
+        repairable.SuccessRepair();
+        if (m_expectedAction == null)
+        {
+            repairable.InitActions();
+            repairable.FinishRepair();
+            return true;
+        }
+        return false;
     }
 }

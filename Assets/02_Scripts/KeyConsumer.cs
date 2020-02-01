@@ -1,11 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+public class KeyConsumer : CustomYieldInstruction
+{
+    public override bool keepWaiting
+    {
+        get
+        {
+            return false;
+        }
+    }
 
-//public class KeyConsumer : CustomYieldInstruction
-//{
-//    public override bool keepWaiting => throw new System.NotImplementedException();
+    public KeyConsumer(float timer, InputAction action)
+    {
 
-    
-//}
+    }
+}
