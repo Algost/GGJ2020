@@ -63,7 +63,7 @@ public class Repairer : MonoBehaviour
                 OnExpectedFail(repairable);
         }
         actions.actionTriggered -= CheckAction;
-        playerInput.actions.RemoveActionMap(repairable.possibleActions);
+        playerInputs.actions.RemoveActionMap(repairable.possibleActions);
     }
 
     void OnExpectedFail(IRepairable repairable)
