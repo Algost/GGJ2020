@@ -279,6 +279,90 @@ public class @InputMapping : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Tower"",
+            ""id"": ""e000f97e-0fc0-4ebc-b378-a98a11eca631"",
+            ""actions"": [
+                {
+                    ""name"": ""A1"",
+                    ""type"": ""Button"",
+                    ""id"": ""41530519-8a61-4e1c-8e09-a436cb7afc1f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""A2"",
+                    ""type"": ""Button"",
+                    ""id"": ""acbf6bca-fb75-4e31-9573-d9746344e7fd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""A3"",
+                    ""type"": ""Button"",
+                    ""id"": ""4483980e-eefe-4ee4-b728-98ea490284d6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""A4"",
+                    ""type"": ""Button"",
+                    ""id"": ""039799fc-30e4-4794-af0d-5479c30d7e38"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b86d121b-27df-45d7-92d3-0ff7c17d02c2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""A1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07109035-4f96-448d-bdca-f2b162c2f5ae"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""A2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2deba8f-7037-4d90-9838-e26ab350c51b"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""A3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f684325e-8bcd-49a6-b475-31375fbdbf66"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""A4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -315,6 +399,12 @@ public class @InputMapping : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Repair = m_Player.FindAction("Repair", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        // Tower
+        m_Tower = asset.FindActionMap("Tower", throwIfNotFound: true);
+        m_Tower_A1 = m_Tower.FindAction("A1", throwIfNotFound: true);
+        m_Tower_A2 = m_Tower.FindAction("A2", throwIfNotFound: true);
+        m_Tower_A3 = m_Tower.FindAction("A3", throwIfNotFound: true);
+        m_Tower_A4 = m_Tower.FindAction("A4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -401,6 +491,63 @@ public class @InputMapping : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Tower
+    private readonly InputActionMap m_Tower;
+    private ITowerActions m_TowerActionsCallbackInterface;
+    private readonly InputAction m_Tower_A1;
+    private readonly InputAction m_Tower_A2;
+    private readonly InputAction m_Tower_A3;
+    private readonly InputAction m_Tower_A4;
+    public struct TowerActions
+    {
+        private @InputMapping m_Wrapper;
+        public TowerActions(@InputMapping wrapper) { m_Wrapper = wrapper; }
+        public InputAction @A1 => m_Wrapper.m_Tower_A1;
+        public InputAction @A2 => m_Wrapper.m_Tower_A2;
+        public InputAction @A3 => m_Wrapper.m_Tower_A3;
+        public InputAction @A4 => m_Wrapper.m_Tower_A4;
+        public InputActionMap Get() { return m_Wrapper.m_Tower; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TowerActions set) { return set.Get(); }
+        public void SetCallbacks(ITowerActions instance)
+        {
+            if (m_Wrapper.m_TowerActionsCallbackInterface != null)
+            {
+                @A1.started -= m_Wrapper.m_TowerActionsCallbackInterface.OnA1;
+                @A1.performed -= m_Wrapper.m_TowerActionsCallbackInterface.OnA1;
+                @A1.canceled -= m_Wrapper.m_TowerActionsCallbackInterface.OnA1;
+                @A2.started -= m_Wrapper.m_TowerActionsCallbackInterface.OnA2;
+                @A2.performed -= m_Wrapper.m_TowerActionsCallbackInterface.OnA2;
+                @A2.canceled -= m_Wrapper.m_TowerActionsCallbackInterface.OnA2;
+                @A3.started -= m_Wrapper.m_TowerActionsCallbackInterface.OnA3;
+                @A3.performed -= m_Wrapper.m_TowerActionsCallbackInterface.OnA3;
+                @A3.canceled -= m_Wrapper.m_TowerActionsCallbackInterface.OnA3;
+                @A4.started -= m_Wrapper.m_TowerActionsCallbackInterface.OnA4;
+                @A4.performed -= m_Wrapper.m_TowerActionsCallbackInterface.OnA4;
+                @A4.canceled -= m_Wrapper.m_TowerActionsCallbackInterface.OnA4;
+            }
+            m_Wrapper.m_TowerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @A1.started += instance.OnA1;
+                @A1.performed += instance.OnA1;
+                @A1.canceled += instance.OnA1;
+                @A2.started += instance.OnA2;
+                @A2.performed += instance.OnA2;
+                @A2.canceled += instance.OnA2;
+                @A3.started += instance.OnA3;
+                @A3.performed += instance.OnA3;
+                @A3.canceled += instance.OnA3;
+                @A4.started += instance.OnA4;
+                @A4.performed += instance.OnA4;
+                @A4.canceled += instance.OnA4;
+            }
+        }
+    }
+    public TowerActions @Tower => new TowerActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -423,5 +570,12 @@ public class @InputMapping : IInputActionCollection, IDisposable
     {
         void OnRepair(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface ITowerActions
+    {
+        void OnA1(InputAction.CallbackContext context);
+        void OnA2(InputAction.CallbackContext context);
+        void OnA3(InputAction.CallbackContext context);
+        void OnA4(InputAction.CallbackContext context);
     }
 }
