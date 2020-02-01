@@ -2,7 +2,8 @@
 using UnityEngine.AI;
 using UnityEngine.Events;
 using System;
-
+using System.Collections;
+using Random = UnityEngine.Random;
 
 public class MobController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class MobController : MonoBehaviour
     public AudioSource audioDatas;
     public Ondie onDie;
     public OnTouch onTouch;
+    public Animator animator;
+    public float maxSpeed = 5.0f;
 
     [Serializable]
     public class Ondie : UnityEvent<int> { }
@@ -22,14 +25,17 @@ public class MobController : MonoBehaviour
 
     private void Start()
     {
+        agent.speed = Random.Range(1.0f, maxSpeed);
         onDie.AddListener(GameManager.Instance.addPointsToScore);
         onTouch.AddListener(GameManager.Instance.loosingFortressPoints);
         audioDatas = GetComponent<AudioSource>();
+        animator.SetTrigger("Walk");
     }
 
     public void setDestionation(Transform target)
     {
         agent.SetDestination(target.position);
+        Debug.Log("target.position : " + target.position.ToString());
     }
 
     public void changePV(int degats)
