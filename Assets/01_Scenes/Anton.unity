@@ -5398,6 +5398,7 @@ MonoBehaviour:
   objectToShoot: []
   bulletPrefab: {fileID: 5446749681955526510, guid: 16cfa30b5e934af40a669934cf4541ab,
     type: 3}
+  repeatRate: 0.5
 --- !u!4 &1673213873
 Transform:
   m_ObjectHideFlags: 0

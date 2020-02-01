@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
+        //FindObjectOfType<AudioManager>().Play("mainTheme");
         DontDestroyOnLoad(this);
     }
 

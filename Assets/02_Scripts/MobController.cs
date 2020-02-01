@@ -24,7 +24,7 @@ public class MobController : MonoBehaviour
 
     private void Start()
     {
-        Invoke("died", 2.0f);
+        //Invoke("died", 2.0f);
         agent.speed = Random.Range(1.0f, maxSpeed);
         onDie.AddListener(GameManager.Instance.addPointsToScore);
         onTouch.AddListener(GameManager.Instance.loosingFortressPoints);

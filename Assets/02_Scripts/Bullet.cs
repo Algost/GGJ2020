@@ -12,13 +12,18 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         float step = speed * Time.deltaTime;
-        if (this.transform == null)
+        if (transformTarget == null)
         {
+            Debug.Log("lastPos : " + lastPos);
             this.transform.position = Vector3.MoveTowards(this.transform.position, lastPos, step);
+            if ((this.transform.position - lastPos).magnitude <= 0.01f)
+                Destroy(this.gameObject);
         }
         else
+        {
             this.transform.position = Vector3.MoveTowards(this.transform.position, transformTarget.position, step);
-        lastPos = transformTarget.position;
+            lastPos = transformTarget.position;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

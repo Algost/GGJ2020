@@ -6,11 +6,11 @@ public class Turret : MonoBehaviour
 {
     public List<GameObject> objectToShoot;
     public GameObject bulletPrefab;
-    //public BoxCollider boxCollider;
+    public float repeatRate = 0.5f;
 
     private void Awake()
     {
-        InvokeRepeating("shootATarget", 1.0f, 1.0f);
+        InvokeRepeating("shootATarget", 1.0f, repeatRate);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -46,10 +46,5 @@ public class Turret : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, (this.transform.position), Quaternion.identity) as GameObject;
             bullet.GetComponent<Bullet>().transformTarget = tmp;
         }
-    }
-
-    public void removeFromListShooting(GameObject name)
-    {
-
     }
 }
