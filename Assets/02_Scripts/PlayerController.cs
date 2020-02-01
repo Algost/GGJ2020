@@ -24,9 +24,4 @@ public class PlayerController : MonoBehaviour
         m_movement = inputValue.Get<Vector2>();
         Debug.Log(m_movement);
     }
-
-    private void OnRepair(InputValue value)
-    {
-        print("Repair");
-    }
 }

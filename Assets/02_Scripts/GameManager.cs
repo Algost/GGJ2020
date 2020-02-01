@@ -15,15 +15,6 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
     }
 
     GameStates gameStates;
-    void OnPlayGame()
-    {
-        print("toto");
-    }
-
-    void OnFixedPlayGame()
-    {
-        print("fixed");
-    }
 
     public void addPointsToScore(int newScore)
     {

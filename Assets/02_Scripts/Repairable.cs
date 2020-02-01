@@ -10,14 +10,14 @@ public interface IRepairable
     InputActionMap possibleActions { get; }
     float actionTime { get; }
 
+    bool damaged { get; }
+
     void StartRepair();
-    void FailRepair();
+    void RepairFail();
     void SuccessRepair();
     void FinishRepair();
-
     InputAction GetNextAction();
     void CreateNewAction();
-
     void InitActions();
 }
 
@@ -29,13 +29,17 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public UnityEvent onOverHeat;
 
-    public UnityEvent onRepair;
+    public UnityEvent onStartRepair;
+    public UnityEvent onRepairSuccess;
+    public UnityEvent onRepairFail;
 
     public UnityEvent onFinishRepair;
     [SerializeField]
     private int m_repairCount;
     [SerializeField]
     private float m_actionTime;
+    [SerializeField]
+    private bool m_damaged;
 
     public int repairActionsCount => m_repairCount;
 
@@ -43,10 +47,18 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public float actionTime => m_actionTime;
 
+    public bool damaged => m_damaged;
+
     private void Start()
     {
-        //InitActions();
-        onOverHeat.Invoke();
+        InitActions();
+        onOverHeat.AddListener(OnOverHeat);
+        onOverHeat?.Invoke();
+    }
+
+    private void OnOverHeat()
+    {
+        m_damaged = true;
     }
 
     private InputAction GetRandomAction()
@@ -57,28 +69,30 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public void StartRepair()
     {
-        onRepair.Invoke();
+        onStartRepair?.Invoke();
     }
 
     public InputAction GetNextAction()
     {
+        print(m_repairActionsQueue.Count);
         if (m_repairActionsQueue.Count == 0) return null;
         return m_repairActionsQueue.Dequeue();
     }
 
     public void FinishRepair()
     {
-        onFinishRepair.Invoke();
+        onFinishRepair?.Invoke();
     }
 
-    public void FailRepair()
+    public void RepairFail()
     {
-        throw new System.NotImplementedException();
+        onRepairFail?.Invoke();
     }
 
     public void SuccessRepair()
     {
-        throw new System.NotImplementedException();
+        m_damaged = false;
+        onRepairSuccess?.Invoke();
     }
 
     public void CreateNewAction()
