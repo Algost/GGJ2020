@@ -7,18 +7,22 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    public Rigidbody rb;
     // Start is called before the first frame update
-    private Vector2 m_movement;
+    private Vector3 m_movement;
 
-    private void Update()
-    { 
-        transform.Translate(speed * Time.deltaTime * m_movement.normalized);
+    private void FixedUpdate()
+    {
+        m_movement = new Vector3(m_movement.x, 0, m_movement.y);
+        m_movement = speed * Time.deltaTime * m_movement.normalized;
+        rb.MovePosition(transform.position + m_movement);
     }
 
     private void OnMovement(InputValue inputValue)
     {
-        print("Move");
+        //print("Move");
         m_movement = inputValue.Get<Vector2>();
+        Debug.Log(m_movement);
     }
 
     private void OnRepair(InputValue value)
