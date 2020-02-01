@@ -156,7 +156,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "PS4",
+                    "name": "Controller",
                     "id": "e2a75cdf-02a4-4497-aa32-6f9a9b6d61d8",
                     "path": "2DVector",
                     "interactions": "",
@@ -169,7 +169,7 @@
                 {
                     "name": "up",
                     "id": "af1dec22-be12-4225-bc9d-6221085a6c8e",
-                    "path": "<DualShockGamepad>/leftStick/up",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -180,7 +180,7 @@
                 {
                     "name": "down",
                     "id": "b9050126-a1a1-450c-a0a1-e28df7bff1f9",
-                    "path": "<DualShockGamepad>/leftStick/down",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -191,7 +191,7 @@
                 {
                     "name": "left",
                     "id": "1b0f2d37-9c71-450e-9390-143608b68bdf",
-                    "path": "<DualShockGamepad>/leftStick/left",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -202,62 +202,7 @@
                 {
                     "name": "right",
                     "id": "6ef29818-0a29-449e-994e-6685cebcef66",
-                    "path": "<DualShockGamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "XBOX",
-                    "id": "bb9e0057-5125-4676-a46e-3c555cced2bf",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "9da86441-1db9-4b75-be8c-583e46d82344",
-                    "path": "<XInputController>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "7b7f646d-edd6-43ff-8d27-75419bbe021e",
-                    "path": "<XInputController>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "facc74b6-aa5f-4e9d-8ac7-eb576f734511",
-                    "path": "<XInputController>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "499d1670-87b0-4031-8ed7-28f465b7a29a",
-                    "path": "<XInputController>/leftStick/right",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
