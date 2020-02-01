@@ -173,7 +173,7 @@ public class @InputMapping : IInputActionCollection, IDisposable
                     ""id"": ""e2a75cdf-02a4-4497-aa32-6f9a9b6d61d8"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,

@@ -8,20 +8,24 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public Rigidbody rb;
+    private bool m_move;
     // Start is called before the first frame update
     private Vector3 m_movement;
 
+    private void Start()
+    {
+        m_move = true;
+    }
+
     private void FixedUpdate()
     {
-        m_movement = new Vector3(m_movement.x, 0, m_movement.y);
-        m_movement = speed * Time.deltaTime * m_movement.normalized;
-        rb.MovePosition(transform.position + m_movement);
+        Vector3 newVec = speed * Time.deltaTime * m_movement;
+        rb.MovePosition(transform.position + newVec);
     }
 
     private void OnMovement(InputValue inputValue)
     {
-        //print("Move");
-        m_movement = inputValue.Get<Vector2>();
-        Debug.Log(m_movement);
+        Vector2 vec = inputValue.Get<Vector2>();
+        m_movement = new Vector3(vec.x, 0, vec.y);
     }
 }

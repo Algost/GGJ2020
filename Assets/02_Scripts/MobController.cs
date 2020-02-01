@@ -2,7 +2,8 @@
 using UnityEngine.AI;
 using UnityEngine.Events;
 using System;
-
+using System.Collections;
+using Random = UnityEngine.Random;
 
 public class MobController : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class MobController : MonoBehaviour
     public int mobPoints = 10;
     public int PV = 10;
     public int fortressDgt = 1;
-    public AudioSource audioDatas;
     public Ondie onDie;
     public OnTouch onTouch;
+    public Animator animator;
+    public float maxSpeed = 5.0f;
 
     [Serializable]
     public class Ondie : UnityEvent<int> { }
@@ -22,14 +24,17 @@ public class MobController : MonoBehaviour
 
     private void Start()
     {
+        Invoke("died", 2.0f);
+        agent.speed = Random.Range(1.0f, maxSpeed);
         onDie.AddListener(GameManager.Instance.addPointsToScore);
         onTouch.AddListener(GameManager.Instance.loosingFortressPoints);
-        audioDatas = GetComponent<AudioSource>();
+        animator.SetTrigger("Walk");
     }
 
     public void setDestionation(Transform target)
     {
         agent.SetDestination(target.position);
+//        Debug.Log("target.position : " + target.position.ToString());
     }
 
     public void changePV(int degats)
@@ -37,10 +42,18 @@ public class MobController : MonoBehaviour
         PV += degats;
         if (PV <= 0)
         {
-            audioDatas.Play(0);
-            onDie.Invoke(mobPoints);
-            Destroy(this);
+            died();
         }
+    }
+
+    public void died()
+    {
+        onDie.Invoke(mobPoints);
+    }
+
+    public void DestroyZombie()
+    {
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
