@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: f157e9ff3db6c1c46846dbda939637a1
+timeCreated: 1515103638
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bag
+    100002: Character3_Head
+    100004: Character3_Hips
+    100006: Character3_LeftArm
+    100008: Character3_LeftFoot
+    100010: Character3_LeftForeArm
+    100012: Character3_LeftHand
+    100014: Character3_LeftHandIndex1
+    100016: Character3_LeftHandIndex2
+    100018: Character3_LeftHandIndex3
+    100020: Character3_LeftHandIndex4
+    100022: Character3_LeftHandMiddle1
+    100024: Character3_LeftHandMiddle2
+    100026: Character3_LeftHandMiddle3
+    100028: Character3_LeftHandMiddle4
+    100030: Character3_LeftHandPinky1
+    100032: Character3_LeftHandPinky2
+    100034: Character3_LeftHandPinky3
+    100036: Character3_LeftHandPinky4
+    100038: Character3_LeftHandRing1
+    100040: Character3_LeftHandRing2
+    100042: Character3_LeftHandRing3
+    100044: Character3_LeftHandRing4
+    100046: Character3_LeftHandThumb1
+    100048: Character3_LeftHandThumb2
+    100050: Character3_LeftHandThumb3
+    100052: Character3_LeftHandThumb4
+    100054: Character3_LeftLeg
+    100056: Character3_LeftShoulder
+    100058: Character3_LeftToeBase
+    100060: Character3_LeftUpLeg
+    100062: Character3_Neck
+    100064: Character3_Reference
+    100066: Character3_RightArm
+    100068: Character3_RightFoot
+    100070: Character3_RightForeArm
+    100072: Character3_RightHand
+    100074: Character3_RightHandIndex1
+    100076: Character3_RightHandIndex2
+    100078: Character3_RightHandIndex3
+    100080: Character3_RightHandIndex4
+    100082: Character3_RightHandMiddle1
+    100084: Character3_RightHandMiddle2
+    100086: Character3_RightHandMiddle3
+    100088: Character3_RightHandMiddle4
+    100090: Character3_RightHandPinky1
+    100092: Character3_RightHandPinky2
+    100094: Character3_RightHandPinky3
+    100096: Character3_RightHandPinky4
+    100098: Character3_RightHandRing1
+    100100: Character3_RightHandRing2
+    100102: Character3_RightHandRing3
+    100104: Character3_RightHandRing4
+    100106: Character3_RightHandThumb1
+    100108: Character3_RightHandThumb2
+    100110: Character3_RightHandThumb3
+    100112: Character3_RightHandThumb4
+    100114: Character3_RightLeg
+    100116: Character3_RightShoulder
+    100118: Character3_RightToeBase
+    100120: Character3_RightUpLeg
+    100122: Character3_Spine
+    100124: Character3_Spine1
+    100126: Character3_Spine2
+    100128: Jaw
+    100130: SM_Hammer
+    100132: SM_warrior
+    100134: //RootNode
+    400000: Bag
+    400002: Character3_Head
+    400004: Character3_Hips
+    400006: Character3_LeftArm
+    400008: Character3_LeftFoot
+    400010: Character3_LeftForeArm
+    400012: Character3_LeftHand
+    400014: Character3_LeftHandIndex1
+    400016: Character3_LeftHandIndex2
+    400018: Character3_LeftHandIndex3
+    400020: Character3_LeftHandIndex4
+    400022: Character3_LeftHandMiddle1
+    400024: Character3_LeftHandMiddle2
+    400026: Character3_LeftHandMiddle3
+    400028: Character3_LeftHandMiddle4
+    400030: Character3_LeftHandPinky1
+    400032: Character3_LeftHandPinky2
+    400034: Character3_LeftHandPinky3
+    400036: Character3_LeftHandPinky4
+    400038: Character3_LeftHandRing1
+    400040: Character3_LeftHandRing2
+    400042: Character3_LeftHandRing3
+    400044: Character3_LeftHandRing4
+    400046: Character3_LeftHandThumb1
+    400048: Character3_LeftHandThumb2
+    400050: Character3_LeftHandThumb3
+    400052: Character3_LeftHandThumb4
+    400054: Character3_LeftLeg
+    400056: Character3_LeftShoulder
+    400058: Character3_LeftToeBase
+    400060: Character3_LeftUpLeg
+    400062: Character3_Neck
+    400064: Character3_Reference
+    400066: Character3_RightArm
+    400068: Character3_RightFoot
+    400070: Character3_RightForeArm
+    400072: Character3_RightHand
+    400074: Character3_RightHandIndex1
+    400076: Character3_RightHandIndex2
+    400078: Character3_RightHandIndex3
+    400080: Character3_RightHandIndex4
+    400082: Character3_RightHandMiddle1
+    400084: Character3_RightHandMiddle2
+    400086: Character3_RightHandMiddle3
+    400088: Character3_RightHandMiddle4
+    400090: Character3_RightHandPinky1
+    400092: Character3_RightHandPinky2
+    400094: Character3_RightHandPinky3
+    400096: Character3_RightHandPinky4
+    400098: Character3_RightHandRing1
+    400100: Character3_RightHandRing2
+    400102: Character3_RightHandRing3
+    400104: Character3_RightHandRing4
+    400106: Character3_RightHandThumb1
+    400108: Character3_RightHandThumb2
+    400110: Character3_RightHandThumb3
+    400112: Character3_RightHandThumb4
+    400114: Character3_RightLeg
+    400116: Character3_RightShoulder
+    400118: Character3_RightToeBase
+    400120: Character3_RightUpLeg
+    400122: Character3_Spine
+    400124: Character3_Spine1
+    400126: Character3_Spine2
+    400128: Jaw
+    400130: SM_Hammer
+    400132: SM_warrior
+    400134: //RootNode
+    2300000: SM_Hammer
+    3300000: SM_Hammer
+    4300000: SM_warrior
+    4300002: SM_Hammer
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: SM_warrior
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
