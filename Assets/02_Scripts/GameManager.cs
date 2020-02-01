@@ -22,6 +22,13 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
     }
     GameStates gameStates;
 
+    public void gamePaused()
+    {
+        gameStates = GameStates.Pause;
+        Time.timeScale = 0.0f;
+    }
+
+
     public void addPointsToScore(int newScore)
     {
         totalScore += newScore;
