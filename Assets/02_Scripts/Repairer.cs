@@ -1,10 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +9,8 @@ public class Repairer : MonoBehaviour
 
     private InputAction m_expectedAction;
     private InputAction m_playerAction;
+    private IRepairable m_repairable;
+    private bool m_repairing = false;
 
     public void StartRepair(IRepairable repairable)
     {
@@ -23,14 +20,23 @@ public class Repairer : MonoBehaviour
     private void CheckAction(InputAction.CallbackContext obj)
     {
         m_playerAction = obj.action;
+        playerInput = true;
     }
 
     IEnumerator TryRepair(IRepairable repairable)
     {
+        m_repairing = true;
         PlayerInput playerInputs = GetComponent<PlayerInput>();
+        //if (playerInputs.actions.actionMaps.Count > 0)
+        //{
+        //    playerInputs.actions.actionMaps[1].Disable();
+        //    playerInputs.actions.RemoveActionMap("Possible Actions");
+        //}
         playerInputs.actions.AddActionMap(repairable.possibleActions);
         InputActionMap actions = playerInputs.actions.actionMaps.Last();
-        actions.actionTriggered += CheckAction;
+        actions.Enable();
+        m_expectedAction = repairable.GetNextAction();
+        actions.actionTriggered += context => CheckAction(context);
 
         bool finished = false;
         playerInput = false;
@@ -43,6 +49,8 @@ public class Repairer : MonoBehaviour
                 timeout += Time.deltaTime;
                 if (playerInput)
                 {
+                    print(m_expectedAction);
+                    print(m_playerAction);
                     playerInput = false;
                     timeout = 0;
                     if (m_playerAction == m_expectedAction)
@@ -62,15 +70,17 @@ public class Repairer : MonoBehaviour
             if (!finished)
                 OnExpectedFail(repairable);
         }
+        actions.Disable();
         actions.actionTriggered -= CheckAction;
         playerInputs.actions.RemoveActionMap(repairable.possibleActions);
+        m_repairing = false;
     }
 
     void OnExpectedFail(IRepairable repairable)
     {
         repairable.CreateNewAction();
         m_expectedAction = repairable.GetNextAction();
-        repairable.FailRepair();
+        repairable.RepairFail();
     }
 
     bool OnExpectedSuccess(IRepairable repairable)
@@ -84,5 +94,27 @@ public class Repairer : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnRepair(InputValue value)
+    {
+        if (!m_repairing && m_repairable != null && m_repairable.damaged)
+            StartRepair(m_repairable);
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Repairable"))
+        {
+            m_repairable = collider.GetComponent<IRepairable>();
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Repairable"))
+        {
+            m_repairable = null;
+        }
     }
 }

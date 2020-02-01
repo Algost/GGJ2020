@@ -21,15 +21,6 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
         GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
     }
     GameStates gameStates;
-    void OnPlayGame()
-    {
-        print("toto");
-    }
-
-    void OnFixedPlayGame()
-    {
-        print("fixed");
-    }
 
     public void addPointsToScore(int newScore)
     {
