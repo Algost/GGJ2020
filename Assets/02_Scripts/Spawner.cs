@@ -21,7 +21,6 @@ public class Spawner : MonoBehaviour
     {
         ResetSpawnTimerEnnemi();
         spawnTimerGloabal = Time.time;
-
     }
 
     //Update is called once per frame

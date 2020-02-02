@@ -28,7 +28,7 @@ public class MobController : MonoBehaviour
         agent.speed = Random.Range(1.0f, maxSpeed);
         onDie.AddListener(GameManager.Instance.addPointsToScore);
         onTouch.AddListener(GameManager.Instance.loosingFortressPoints);
-        animator.SetTrigger("Walk");
+        animator.SetFloat("MoveSpeed", 1f);
     }
 
     public void setDestionation(Transform target)
@@ -56,11 +56,8 @@ public class MobController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.transform.tag == "Fortress")
-        {
-            onTouch.Invoke(fortressDgt);
-        }
+        onTouch.Invoke(fortressDgt);
     }
 }
