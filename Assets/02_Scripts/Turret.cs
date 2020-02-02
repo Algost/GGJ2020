@@ -13,10 +13,16 @@ public class Turret : MonoBehaviour
     {
         InvokeRepeating("shootATarget", 1.0f, repeatRate);
     }
-    private void OnTriggerEnter(Collider other)
+    public void CheckMobsEnter(Collider other)
     {
         if (other.tag == "Mobs")
             objectToShoot.Add(other.gameObject);
+    }
+
+    public void CheckMobsExit(Collider other)
+    {
+        if (other.tag == "Mobs")
+            objectToShoot.Remove(other.gameObject);
     }
 
     public Transform findTheClosestTarget()
