@@ -38,9 +38,9 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
     public void loosingFortressPoints(int points)
     {
         fortressPoints += points;
+        //GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
         if (fortressPoints <= 0)
         {
-            //GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
             gameStates = GameStates.End;
         }
     }
