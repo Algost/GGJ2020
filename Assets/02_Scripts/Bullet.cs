@@ -26,11 +26,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Mobs")
+        if (other.CompareTag("Mobs"))
         {
-            collision.gameObject.GetComponent<MobController>().changePV(damage);
+            other.GetComponent<MobController>().changePV(damage);
             Destroy(this.gameObject);
         }
     }

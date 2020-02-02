@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 308549435003231687}
   - component: {fileID: 515901699}
   - component: {fileID: 515901704}
-  - component: {fileID: 515901698}
-  - component: {fileID: 515901703}
+  - component: {fileID: 8624369308362347707}
   m_Layer: 0
   m_Name: WarriorPBR1_Hammer
   m_TagString: Untagged
@@ -85,7 +84,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7009183, y: 1.4193081, z: 0.4956967}
   m_Center: {x: 0.0072543346, y: 0.71278334, z: 0.08542625}
---- !u!114 &515901698
+--- !u!114 &8624369308362347707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,22 +93,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 515901697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47cf5f6db0c561948bb2243a3465960e, type: 3}
+  m_Script: {fileID: 11500000, guid: fc74e29ba85570140830eba1574d4e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
---- !u!114 &515901703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515901697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6852ea0c2322645a19e0a8709c86b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  speed: 10
+  rb: {fileID: 0}
 --- !u!1 &174578863451570233
 GameObject:
   m_ObjectHideFlags: 0
@@ -4699,6 +4687,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4710,6 +4699,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

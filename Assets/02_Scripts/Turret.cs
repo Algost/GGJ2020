@@ -7,6 +7,7 @@ public class Turret : MonoBehaviour
     public List<GameObject> objectToShoot;
     public GameObject bulletPrefab;
     public float repeatRate = 0.5f;
+    public Transform bulletSpawn;
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class Turret : MonoBehaviour
         objectToShoot.RemoveAll(item => item == null);
         if ((tmp = findTheClosestTarget()) != null)
         {
-            GameObject bullet = Instantiate(bulletPrefab, (this.transform.position), Quaternion.identity) as GameObject;
+            GameObject bullet = Instantiate(bulletPrefab, (bulletSpawn.position), Quaternion.identity) as GameObject;
             bullet.GetComponent<Bullet>().transformTarget = tmp;
         }
     }

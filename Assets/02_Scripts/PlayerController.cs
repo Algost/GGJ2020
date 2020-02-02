@@ -26,6 +26,6 @@ public class PlayerController : MonoBehaviour
     private void OnMovement(InputValue inputValue)
     {
         Vector2 vec = inputValue.Get<Vector2>();
-        m_movement = new Vector3(vec.x, 0, vec.y);
+        m_movement = new Vector3(vec.x, transform.position.y, vec.y);
     }
 }
