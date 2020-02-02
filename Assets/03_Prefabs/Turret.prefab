@@ -260,7 +260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4389161274167583180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -537,7 +537,31 @@ MonoBehaviour:
       m_Flags: 0
   onOverHeat:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6603647809932878475}
+        m_MethodName: set_sprite
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 21300000, guid: 91aabd6d342d2e3409c34235f88ae9b7,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2718082142099789385}
+        m_MethodName: set_alpha
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 21300000, guid: 91aabd6d342d2e3409c34235f88ae9b7,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onStartRepair:
     m_PersistentCalls:
       m_Calls: []
@@ -547,29 +571,40 @@ MonoBehaviour:
   onRepairFail:
     m_PersistentCalls:
       m_Calls: []
-  ContentImage: {fileID: 0}
+  ContentImage: {fileID: 6603647809932878475}
   onFinishRepair:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2718082142099789385}
+        m_MethodName: set_alpha
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_repairCount: 4
   m_actionTime: 5
   m_damaged: 0
   actionImages:
   - xboxSprite: {fileID: 21300000, guid: 500807dd9c852524dafe8ee9479d5deb, type: 3}
-    ps4Sprite: {fileID: 21300000, guid: 500807dd9c852524dafe8ee9479d5deb, type: 3}
-    keyboardSprite: {fileID: 0}
+    ps4Sprite: {fileID: 21300000, guid: c623bc995b697174a94aa061d7363003, type: 3}
+    keyboardSprite: {fileID: 21300000, guid: bbbe0f62adbe0c24e9021e7130842923, type: 3}
     action: A1
   - xboxSprite: {fileID: 21300000, guid: eafe8caa8a06adf45be92c3f4cb8ce88, type: 3}
-    ps4Sprite: {fileID: 21300000, guid: eafe8caa8a06adf45be92c3f4cb8ce88, type: 3}
-    keyboardSprite: {fileID: 0}
+    ps4Sprite: {fileID: 21300000, guid: 74c9be4c5f3cd2e41a4f769579fde512, type: 3}
+    keyboardSprite: {fileID: 21300000, guid: ed24572678dd31f4abd4f417def5fc96, type: 3}
     action: A2
   - xboxSprite: {fileID: 21300000, guid: a18edffdc3303364280a6897e2181fc6, type: 3}
-    ps4Sprite: {fileID: 21300000, guid: a18edffdc3303364280a6897e2181fc6, type: 3}
-    keyboardSprite: {fileID: 0}
+    ps4Sprite: {fileID: 21300000, guid: 391e90c1f4889ce4ebb3984ed04530b5, type: 3}
+    keyboardSprite: {fileID: 21300000, guid: 3819f255a47fed6478535f13534e1e50, type: 3}
     action: A3
-  - xboxSprite: {fileID: 0}
-    ps4Sprite: {fileID: 21300000, guid: 9a689c2cd99a2424b89a17322f4975b7, type: 3}
-    keyboardSprite: {fileID: 21300000, guid: 9a689c2cd99a2424b89a17322f4975b7, type: 3}
+  - xboxSprite: {fileID: 21300000, guid: 9a689c2cd99a2424b89a17322f4975b7, type: 3}
+    ps4Sprite: {fileID: 21300000, guid: 2f7c33ae440c7f8468cc44565a539d34, type: 3}
+    keyboardSprite: {fileID: 21300000, guid: 4fbb78440f9ba1e469ef0a83d017c757, type: 3}
     action: A4
 --- !u!1 &4921095232842474434
 GameObject:

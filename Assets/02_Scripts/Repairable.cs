@@ -70,7 +70,6 @@ public class Repairable : MonoBehaviour, IRepairable
     private void Start()
     {
         InitActions();
-        onOverHeat.AddListener(SetOverHeat);
     }
 
     private InputAction GetRandomAction()
@@ -92,6 +91,7 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public void FinishRepair()
     {
+        m_damaged = false;
         onFinishRepair?.Invoke();
     }
 
@@ -102,7 +102,6 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public void SuccessRepair()
     {
-        m_damaged = false;
         onRepairSuccess?.Invoke();
     }
 
@@ -123,7 +122,7 @@ public class Repairable : MonoBehaviour, IRepairable
     public void SetOverHeat()
     {
         m_damaged = true;
-        onOverHeat.Invoke();
+        onOverHeat?.Invoke();
     }
 
     public void SetImage(int type, InputAction action)

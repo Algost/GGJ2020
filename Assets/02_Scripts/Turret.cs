@@ -66,8 +66,14 @@ public class Turret : MonoBehaviour
         bullet.GetComponent<Bullet>().transformTarget = tmp;
         m_overHeatStatus++;
         if (m_overHeatStatus >= m_overHeatRange.y)
+        {
             m_repairable.SetOverHeat();
+            m_overHeatStatus = 0;
+        }
         else if (m_overHeatStatus >= m_overHeatRange.x && Random.Range(0, 4) == 0)
+        {
             m_repairable.SetOverHeat();
+            m_overHeatStatus = 0;
+        }
     }
 }

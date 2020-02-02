@@ -11,7 +11,7 @@
                     "id": "e450fdb3-273a-4543-ab15-d4c0f460ffe2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 },
                 {
                     "name": "Movement",
@@ -26,7 +26,7 @@
                 {
                     "name": "",
                     "id": "1a37bff4-db90-4503-81c7-b10dea10e970",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

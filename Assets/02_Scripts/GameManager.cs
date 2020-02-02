@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameManager : AGameManager<GameManager, GameManager.GameStates>
 {
-    public int fortressPoints = 10;
+    public int fortressPoints = 50;
     public int totalScore = 0;
     public enum GameStates
     {
@@ -15,11 +15,11 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
         End
     }
 
-    //public void Awake()
-    //{
-    //    //GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
-    //    //GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
-    //}
+    public void Start()
+    {
+       GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
+       GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
+    }
     GameStates gameStates;
 
     public void gamePaused()
@@ -28,20 +28,26 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
         Time.timeScale = 0.0f;
     }
 
+    public void gameEnd()
+    {
+        gameStates = GameStates.End;
+        Time.timeScale = 0.0f;
+    }
+
 
     public void addPointsToScore(int newScore)
     {
         totalScore += newScore;
-        //GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
+        GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
     }
 
     public void loosingFortressPoints(int points)
     {
         fortressPoints += points;
-        //GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
+        GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
         if (fortressPoints <= 0)
         {
-            gameStates = GameStates.End;
+            gameEnd();
         }
     }
 }

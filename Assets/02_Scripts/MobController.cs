@@ -58,6 +58,10 @@ public class MobController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        onTouch.Invoke(fortressDgt);
+        if (collider.CompareTag("Fortress"))
+        { 
+            onTouch.Invoke(fortressDgt);
+            died();
+        }
     }
 }

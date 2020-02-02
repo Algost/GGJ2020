@@ -18,10 +18,16 @@ public class Repairer : MonoBehaviour
         StartCoroutine("TryRepair", repairable);
     }
 
+    int counter = 0;
     private void CheckAction(InputAction.CallbackContext obj)
     {
-        m_playerAction = obj.action;
-        playerInput = true;
+        int count = m_repairable.possibleActions.actions.Count;
+        int tmp = (counter++) % count;
+        if (tmp == 0)
+        {
+            m_playerAction = obj.action;
+            playerInput = true;
+        }
     }
 
     IEnumerator TryRepair(IRepairable repairable)
@@ -60,13 +66,11 @@ public class Repairer : MonoBehaviour
                 timeout += Time.deltaTime;
                 if (playerInput)
                 {
-                    print(m_expectedAction);
-                    print(m_playerAction);
                     playerInput = false;
                     timeout = 0;
                     if (m_playerAction == m_expectedAction)
                     {
-                        if (OnExpectedSuccess(repairable))
+                        if (OnExpectedSuccess(repairable, playerInputs))
                         {
                             finished = true;
                             break;
@@ -74,12 +78,12 @@ public class Repairer : MonoBehaviour
                     }
                     else
                     {
-                        OnExpectedFail(repairable);
+                        OnExpectedFail(repairable, playerInputs);
                     }
                 }
             }
             if (!finished)
-                OnExpectedFail(repairable);
+                OnExpectedFail(repairable, playerInputs);
         }
         actions.Disable();
         actions.actionTriggered -= CheckAction;
@@ -96,14 +100,15 @@ public class Repairer : MonoBehaviour
         return 0;
     }
 
-    void OnExpectedFail(IRepairable repairable)
+    void OnExpectedFail(IRepairable repairable, PlayerInput playerInputs)
     {
         repairable.CreateNewAction();
         m_expectedAction = repairable.GetNextAction();
+        repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
         repairable.RepairFail();
     }
 
-    bool OnExpectedSuccess(IRepairable repairable)
+    bool OnExpectedSuccess(IRepairable repairable, PlayerInput playerInputs)
     {
         m_expectedAction = repairable.GetNextAction();
         repairable.SuccessRepair();
@@ -113,6 +118,8 @@ public class Repairer : MonoBehaviour
             repairable.FinishRepair();
             return true;
         }
+        else
+            repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
         return false;
     }
 
