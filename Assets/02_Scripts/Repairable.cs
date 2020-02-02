@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public interface IRepairable
 {
@@ -21,6 +22,8 @@ public interface IRepairable
     InputAction GetNextAction();
     void CreateNewAction();
     void InitActions();
+
+    void SetImage(int type, InputAction action);
 }
 
 public class Repairable : MonoBehaviour, IRepairable
@@ -34,6 +37,7 @@ public class Repairable : MonoBehaviour, IRepairable
     public UnityEvent onStartRepair;
     public UnityEvent onRepairSuccess;
     public UnityEvent onRepairFail;
+    public Image ContentImage;
 
     public UnityEvent onFinishRepair;
     [SerializeField]
@@ -42,8 +46,8 @@ public class Repairable : MonoBehaviour, IRepairable
     private float m_actionTime;
     [SerializeField]
     private bool m_damaged;
-    [SerializeField]
-    private ActionImage[] actionImages;
+
+    public ActionImage[] actionImages;
 
     [System.Serializable]
     public class ActionImage
@@ -82,7 +86,6 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public InputAction GetNextAction()
     {
-        print(m_repairActionsQueue.Count);
         if (m_repairActionsQueue.Count == 0) return null;
         return m_repairActionsQueue.Dequeue();
     }
@@ -120,6 +123,22 @@ public class Repairable : MonoBehaviour, IRepairable
     public void SetOverHeat()
     {
         m_damaged = true;
-        onOverHeat?.Invoke();
+        onOverHeat.Invoke();
+    }
+
+    public void SetImage(int type, InputAction action)
+    {
+        foreach (var sa in actionImages)
+        {
+            if (sa.action == action.name)
+            {
+                if (type == 0)
+                    ContentImage.sprite = sa.xboxSprite;
+                else if (type == 1)
+                    ContentImage.sprite = sa.ps4Sprite;
+                else
+                    ContentImage.sprite = sa.keyboardSprite;
+            }
+        }
     }
 }

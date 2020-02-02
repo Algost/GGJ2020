@@ -44,3 +44,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: maskable
+    uniqueID: 3982682517
+    locked: 0

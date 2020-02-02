@@ -12,11 +12,11 @@ public class Turret : MonoBehaviour
     private Vector2 m_overHeatRange;
 
     private int m_overHeatStatus;
-    private IRepairable m_repairable;
+    private Repairable m_repairable;
 
     private void Awake()
     {
-        m_repairable = GetComponent<IRepairable>();
+        m_repairable = GetComponent<Repairable>();
         InvokeRepeating("shootATarget", 1.0f, repeatRate);
     }
     public void CheckMobsEnter(Collider other)

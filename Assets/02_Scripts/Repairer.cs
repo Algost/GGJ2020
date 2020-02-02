@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,17 +26,27 @@ public class Repairer : MonoBehaviour
 
     IEnumerator TryRepair(IRepairable repairable)
     {
+        print("toto");
         m_repairing = true;
         PlayerInput playerInputs = GetComponent<PlayerInput>();
         //if (playerInputs.actions.actionMaps.Count > 0)
         //{
         //    playerInputs.actions.actionMaps[1].Disable();
-        //    playerInputs.actions.RemoveActionMap("Possible Actions");
         //}
-        playerInputs.actions.AddActionMap(repairable.possibleActions);
+        try
+        {
+            playerInputs.actions.AddActionMap(repairable.possibleActions);
+        }
+        catch (Exception)
+        {
+            playerInputs.actions.actionMaps[1].Disable();
+            playerInputs.actions.RemoveActionMap("Possible Actions");
+            playerInputs.actions.AddActionMap(repairable.possibleActions);
+        }
         InputActionMap actions = playerInputs.actions.actionMaps.Last();
         actions.Enable();
         m_expectedAction = repairable.GetNextAction();
+        repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
         actions.actionTriggered += context => CheckAction(context);
 
         bool finished = false;
@@ -76,6 +87,15 @@ public class Repairer : MonoBehaviour
         m_repairing = false;
     }
 
+    private int GetPlayerType(PlayerInput player)
+    {
+        foreach (var item in player.devices)
+        {
+            print(item.name);
+        }
+        return 0;
+    }
+
     void OnExpectedFail(IRepairable repairable)
     {
         repairable.CreateNewAction();
@@ -106,7 +126,7 @@ public class Repairer : MonoBehaviour
     {
         if (collider.CompareTag("Repairable"))
         {
-            m_repairable = collider.GetComponent<IRepairable>();
+            m_repairable = collider.GetComponentInParent<IRepairable>();
         }
     }
 
