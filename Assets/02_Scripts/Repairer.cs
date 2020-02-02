@@ -101,7 +101,11 @@ public class Repairer : MonoBehaviour
                 {
                     return 0;
                 }
-                else if (item.description.deviceClass == "Keyboard")
+                else if (item.description.interfaceName == "HID")
+                {
+                    return 1;
+                }
+                else// if (item.description.deviceClass == "Keyboard")
                 {
                     return 2;
                 }
