@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void loadGameScene()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game 2");
     }
 
     public void loadCreditScene()

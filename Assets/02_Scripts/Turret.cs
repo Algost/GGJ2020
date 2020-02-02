@@ -47,10 +47,9 @@ public class Turret : MonoBehaviour
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
+        objectToShoot.RemoveAll(item => item == null);
         foreach (GameObject potentialTarget in objectToShoot)
         {
-            if (potentialTarget == null)
-                break;
             Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
