@@ -95,7 +95,17 @@ public class Repairer : MonoBehaviour
     {
         foreach (var item in player.devices)
         {
-            print(item.name);
+            if (item.wasUpdatedThisFrame)
+            {
+                if (item.description.interfaceName == "XInput")
+                {
+                    return 0;
+                }
+                else if (item.description.deviceClass == "Keyboard")
+                {
+                    return 2;
+                }
+            }
         }
         return 0;
     }
