@@ -40,13 +40,14 @@ public class Repairer : MonoBehaviour
         //    playerInputs.actions.actionMaps[1].Disable();
         //}
         InputActionMap am = new InputActionMap("PossibleAction" + playerInputs.user.id);
-        
+        playerInputs.actions.actionMaps[1].Disable();
+        playerInputs.actions.RemoveAction("PossibleAction" + playerInputs.user.id);
         //try
         //{
-            foreach (var item in repairable.possibleActions)
+        foreach (var item in repairable.possibleActions)
             {
                 InputAction ac = am.AddAction(item.name, item.type);
-                foreach (var b in ac.bindings)
+                foreach (var b in item.bindings)
                 {
                     ac.AddBinding(b);
                 }
