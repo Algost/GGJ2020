@@ -426,7 +426,7 @@ MonoBehaviour:
     type: 3}
   repeatRate: 0.1
   bulletSpawn: {fileID: 2337721376953253068}
-  m_overHeatRange: {x: 40, y: 60}
+  m_overHeatRange: {x: 10, y: 15}
 --- !u!114 &5230221322434602432
 MonoBehaviour:
   m_ObjectHideFlags: 0

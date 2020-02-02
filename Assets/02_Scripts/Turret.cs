@@ -85,11 +85,15 @@ public class Turret : MonoBehaviour
         {
             m_repairable.SetOverHeat();
             m_overHeatStatus = 0;
+            m_overHeatRange.y += 10;
+            m_overHeatRange.x += 10;
         }
         else if (m_overHeatStatus >= m_overHeatRange.x && Random.Range(0, 4) == 0)
         {
             m_repairable.SetOverHeat();
             m_overHeatStatus = 0;
+            m_overHeatRange.y += 10;
+            m_overHeatRange.x += 10;
         }
     }
 }
