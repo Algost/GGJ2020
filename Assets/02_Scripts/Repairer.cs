@@ -39,21 +39,38 @@ public class Repairer : MonoBehaviour
         //{
         //    playerInputs.actions.actionMaps[1].Disable();
         //}
-        try
-        {
-            playerInputs.actions.AddActionMap(repairable.possibleActions);
-        }
-        catch (Exception)
-        {
-            playerInputs.actions.actionMaps[1].Disable();
-            playerInputs.actions.RemoveActionMap("Possible Actions");
-            playerInputs.actions.AddActionMap(repairable.possibleActions);
-        }
-        InputActionMap actions = playerInputs.actions.actionMaps.Last();
-        actions.Enable();
+        InputActionMap am = new InputActionMap("PossibleAction" + playerInputs.user.id);
+        
+        //try
+        //{
+            foreach (var item in repairable.possibleActions)
+            {
+                InputAction ac = am.AddAction(item.name, item.type);
+                foreach (var b in ac.bindings)
+                {
+                    ac.AddBinding(b);
+                }
+            }
+            playerInputs.actions.AddActionMap(am);
+        //}
+        //catch (Exception)
+        //{
+        //    playerInputs.actions.actionMaps[1].Disable();
+        //    foreach (var item in repairable.possibleActions)
+        //    {
+        //        InputAction ac = am.AddAction(item.name, item.type);
+        //        foreach (var b in ac.bindings)
+        //        {
+        //            ac.AddBinding(b);
+        //        }
+        //    }
+        //    playerInputs.actions.AddActionMap(am);
+        //}
+        //InputActionMap actions = playerInputs.actions.actionMaps.Last();
+        am.Enable();
         m_expectedAction = repairable.GetNextAction();
         repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
-        actions.actionTriggered += context => CheckAction(context);
+        am.actionTriggered += context => CheckAction(context);
 
         bool finished = false;
         playerInput = false;
@@ -85,9 +102,9 @@ public class Repairer : MonoBehaviour
             if (!finished)
                 OnExpectedFail(repairable, playerInputs);
         }
-        actions.Disable();
-        actions.actionTriggered -= CheckAction;
-        playerInputs.actions.RemoveActionMap(repairable.possibleActions);
+        am.Disable();
+        am.actionTriggered -= CheckAction;
+        playerInputs.actions.RemoveActionMap(am);
         m_repairing = false;
     }
 
