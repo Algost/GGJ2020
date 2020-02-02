@@ -56,7 +56,7 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
 
     public void addASpawner()
     {
-        Debug.LogError("addASpawner");
+        //Debug.LogError("addASpawner");
         if (spawners.Count == 0)
             return;
         GameObject tmp = spawners[Random.Range(0, spawners.Count)];

@@ -32,7 +32,7 @@ public class Repairer : MonoBehaviour
 
     IEnumerator TryRepair(IRepairable repairable)
     {
-        print("toto");
+        //print("toto");
         m_repairing = true;
         PlayerInput playerInputs = GetComponent<PlayerInput>();
         //if (playerInputs.actions.actionMaps.Count > 0)

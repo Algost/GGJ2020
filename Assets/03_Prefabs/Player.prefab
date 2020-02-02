@@ -68,8 +68,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 515901697, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
       propertyPath: m_Name
-      value: Warrior1_Hammer
+      value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 515901699, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 00eea979619afad4589915f3499278cf, type: 3}
     - target: {fileID: 515901701, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -453,7 +457,7 @@ PrefabInstance:
     - target: {fileID: 8624369308362347707, guid: a1a4e056c0d7aca4589819c0b0a3f5ab,
         type: 3}
       propertyPath: speed
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}

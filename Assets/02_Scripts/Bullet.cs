@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
         float step = speed * Time.deltaTime;
         if (transformTarget == null)
         {
-            Debug.Log("lastPos : " + lastPos);
+            //Debug.Log("lastPos : " + lastPos);
             this.transform.position = Vector3.MoveTowards(this.transform.position, lastPos, step);
             if ((this.transform.position - lastPos).magnitude <= 0.01f)
                 Destroy(this.gameObject);

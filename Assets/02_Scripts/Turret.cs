@@ -49,6 +49,8 @@ public class Turret : MonoBehaviour
 
         foreach (GameObject potentialTarget in objectToShoot)
         {
+            if (potentialTarget == null)
+                break;
             Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
