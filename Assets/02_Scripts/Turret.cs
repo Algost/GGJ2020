@@ -8,9 +8,15 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public float repeatRate = 0.5f;
     public Transform bulletSpawn;
+    [SerializeField]
+    private Vector2 m_overHeatRange;
+
+    private int m_overHeatStatus;
+    private IRepairable m_repairable;
 
     private void Awake()
     {
+        m_repairable = GetComponent<IRepairable>();
         InvokeRepeating("shootATarget", 1.0f, repeatRate);
     }
     public void CheckMobsEnter(Collider other)
@@ -48,10 +54,20 @@ public class Turret : MonoBehaviour
     {
         Transform tmp;
         objectToShoot.RemoveAll(item => item == null);
-        if ((tmp = findTheClosestTarget()) != null)
+        if ((tmp = findTheClosestTarget()) != null && !m_repairable.damaged)
         {
-            GameObject bullet = Instantiate(bulletPrefab, (bulletSpawn.position), Quaternion.identity) as GameObject;
-            bullet.GetComponent<Bullet>().transformTarget = tmp;
+            InstantiateBullet(tmp);
         }
+    }
+
+    private void InstantiateBullet(Transform tmp)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, (bulletSpawn.position), Quaternion.identity) as GameObject;
+        bullet.GetComponent<Bullet>().transformTarget = tmp;
+        m_overHeatStatus++;
+        if (m_overHeatStatus >= m_overHeatRange.y)
+            m_repairable.SetOverHeat();
+        else if (m_overHeatStatus >= m_overHeatRange.x && Random.Range(0, 4) == 0)
+            m_repairable.SetOverHeat();
     }
 }

@@ -16,6 +16,8 @@ public interface IRepairable
     void RepairFail();
     void SuccessRepair();
     void FinishRepair();
+
+    void SetOverHeat();
     InputAction GetNextAction();
     void CreateNewAction();
     void InitActions();
@@ -40,6 +42,18 @@ public class Repairable : MonoBehaviour, IRepairable
     private float m_actionTime;
     [SerializeField]
     private bool m_damaged;
+    [SerializeField]
+    private ActionImage[] actionImages;
+
+    [System.Serializable]
+    public class ActionImage
+    {
+        public Sprite xboxSprite;
+        public Sprite ps4Sprite;
+        public Sprite keyboardSprite;
+        public string action;
+    }
+
 
     public int repairActionsCount => m_repairCount;
 
@@ -52,13 +66,7 @@ public class Repairable : MonoBehaviour, IRepairable
     private void Start()
     {
         InitActions();
-        onOverHeat.AddListener(OnOverHeat);
-        onOverHeat?.Invoke();
-    }
-
-    private void OnOverHeat()
-    {
-        m_damaged = true;
+        onOverHeat.AddListener(SetOverHeat);
     }
 
     private InputAction GetRandomAction()
@@ -107,5 +115,11 @@ public class Repairable : MonoBehaviour, IRepairable
         {
             m_repairActionsQueue.Enqueue(GetRandomAction());
         }
+    }
+
+    public void SetOverHeat()
+    {
+        m_damaged = true;
+        onOverHeat?.Invoke();
     }
 }
