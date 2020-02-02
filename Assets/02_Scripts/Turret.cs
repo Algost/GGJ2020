@@ -68,6 +68,11 @@ public class Turret : MonoBehaviour
         if ((tmp = findTheClosestTarget()) != null && !m_repairable.damaged)
         {
             InstantiateBullet(tmp);
+            MobController mb = tmp.GetComponent<MobController>();
+            if (-bulletPrefab.GetComponent<Bullet>().damage >= mb.PV)
+            {
+                objectToShoot.Remove(tmp.gameObject);
+            }
         }
     }
 
