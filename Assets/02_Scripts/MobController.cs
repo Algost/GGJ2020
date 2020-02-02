@@ -9,15 +9,16 @@ public class MobController : MonoBehaviour
 {
     public NavMeshAgent agent;
     public int mobPoints = 10;
-    public int PV = 10;
+    public int PV = 5;
     public int fortressDgt = 1;
     public Ondie onDie;
     public OnTouch onTouch;
     public Animator animator;
     public float maxSpeed = 5.0f;
+    public bool isDead;
 
     [Serializable]
-    public class Ondie : UnityEvent<int> { }
+    public class Ondie : UnityEvent<MobController> { }
 
     [Serializable]
     public class OnTouch : UnityEvent<int> { }
@@ -34,11 +35,12 @@ public class MobController : MonoBehaviour
     public void setDestionation(Transform target)
     {
         agent.SetDestination(target.position);
-//        Debug.Log("target.position : " + target.position.ToString());
     }
 
     public void changePV(int degats)
     {
+        if (isDead)
+            return;
         PV += degats;
         if (PV <= 0)
         {
@@ -48,7 +50,9 @@ public class MobController : MonoBehaviour
 
     public void died()
     {
-        onDie.Invoke(mobPoints);
+        isDead = true;
+        agent.speed = 0;
+        onDie.Invoke(this);
     }
 
     public void DestroyZombie()

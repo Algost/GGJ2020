@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformTarget: {fileID: 0}
-  speed: 6
+  speed: 10
   damage: -5
   lastPos: {x: 0, y: 0, z: 0}

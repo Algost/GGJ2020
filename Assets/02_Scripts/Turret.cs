@@ -22,8 +22,18 @@ public class Turret : MonoBehaviour
     public void CheckMobsEnter(Collider other)
     {
         if (other.tag == "Mobs")
+        { 
             objectToShoot.Add(other.gameObject);
+            MobController mob = other.GetComponent<MobController>();
+            mob.onDie.AddListener(removeFromListToShoot);
+        }
     }
+
+    public void removeFromListToShoot(MobController mob)
+    {
+        objectToShoot.Remove(mob.gameObject);
+    }
+
 
     public void CheckMobsExit(Collider other)
     {
@@ -53,7 +63,7 @@ public class Turret : MonoBehaviour
     public void shootATarget()
     {
         Transform tmp;
-        objectToShoot.RemoveAll(item => item == null);
+        //objectToShoot.RemoveAll(item => item == null);
         if ((tmp = findTheClosestTarget()) != null && !m_repairable.damaged)
         {
             InstantiateBullet(tmp);

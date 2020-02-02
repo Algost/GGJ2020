@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89693bff2be374349a8bf8e38b5bf7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabEnnemi: {fileID: 0}
-  spawnTime: 0
-  spawnTimeRandom: 0
+  prefabEnnemi: {fileID: 6153117283218254807, guid: dc14f55fbab27e94fa934c4ffda06e5b,
+    type: 3}
+  spawnTime: 1
+  spawnTimeRandom: 4
+  positionToReach: {fileID: 0}

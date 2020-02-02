@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityTools;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : AGameManager<GameManager, GameManager.GameStates>
 {
     public int fortressPoints = 50;
     public int totalScore = 0;
+    public List<GameObject> spawners;
     public enum GameStates
     {
         Play,
@@ -32,13 +34,34 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
     {
         gameStates = GameStates.End;
         Time.timeScale = 0.0f;
+        GameObject.Find("GUI/Canvas/GameOver").SetActive(true);
+        GameObject.Find("GUI/Canvas/restartBtn").SetActive(true);
+    }
+
+    public void restartScene()
+    {
+        SceneManager.LoadScene(2);
     }
 
 
-    public void addPointsToScore(int newScore)
+    public void addPointsToScore(MobController mob)
     {
-        totalScore += newScore;
+        totalScore += mob.mobPoints;
         GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
+        if (totalScore % 1000 == 0 && totalScore > 0)
+        {
+            addASpawner();
+        }
+    }
+
+    public void addASpawner()
+    {
+        Debug.LogError("addASpawner");
+        if (spawners.Count == 0)
+            return;
+        GameObject tmp = spawners[Random.Range(0, spawners.Count)];
+        tmp.SetActive(true);
+        spawners.Remove(tmp);
     }
 
     public void loosingFortressPoints(int points)

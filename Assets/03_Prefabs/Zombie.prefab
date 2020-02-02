@@ -210,8 +210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 6153117283218254802}
-  mobPoints: 10
-  PV: 10
+  mobPoints: 100
+  PV: 5
   fortressDgt: -1
   onDie:
     m_PersistentCalls:
@@ -265,7 +265,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   animator: {fileID: 6153117283218254803}
-  maxSpeed: 5
+  maxSpeed: 3
 --- !u!195 &6153117283218254802
 NavMeshAgent:
   m_ObjectHideFlags: 0
