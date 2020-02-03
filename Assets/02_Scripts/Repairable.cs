@@ -41,9 +41,9 @@ public class Repairable : MonoBehaviour, IRepairable
 
     public UnityEvent onFinishRepair;
     [SerializeField]
-    private int m_repairCount;
+    private int m_repairCount = 4;
     [SerializeField]
-    private float m_actionTime;
+    private float m_actionTime = 3f;
     [SerializeField]
     private bool m_damaged;
 

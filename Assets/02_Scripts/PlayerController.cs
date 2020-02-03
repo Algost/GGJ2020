@@ -8,14 +8,14 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public Rigidbody rb;
-    private bool m_move;
     // Start is called before the first frame update
     private Vector3 m_movement;
+    private PlayerInput m_playerInput;
 
     private void Start()
     {
-        m_move = true;
-    }
+        m_playerInput = GetComponent<PlayerInput>();
+        }
 
     private void FixedUpdate()
     {
@@ -25,7 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnMovement(InputValue inputValue)
     {
-        Vector2 vec = inputValue.Get<Vector2>();
-        m_movement = new Vector3(vec.x, transform.position.y, vec.y);
+        //if ()
+        //{
+            Vector2 vec = inputValue.Get<Vector2>();
+            m_movement = new Vector3(vec.x, transform.position.y, vec.y);
+        //}
     }
 }

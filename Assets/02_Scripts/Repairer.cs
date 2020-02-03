@@ -4,77 +4,68 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class Repairer : MonoBehaviour
 {
-    private bool playerInput = false;
-
     private InputAction m_expectedAction;
     private InputAction m_playerAction;
     private IRepairable m_repairable;
     private bool m_repairing = false;
+
+    private PlayerInput m_playerInputs;
+    private InputActionMap m_actionMap;
+    public string PlayerMaps { get { return string.Format("RuntimeMaps_{0}", m_playerInputs.user.id); } }
+    private void Start()
+    {
+        m_playerInputs = GetComponent<PlayerInput>();
+        m_playerAction = null;
+    }
 
     public void StartRepair(IRepairable repairable)
     {
         StartCoroutine("TryRepair", repairable);
     }
 
-    int counter = 0;
     private void CheckAction(InputAction.CallbackContext obj)
     {
-        int count = m_repairable.possibleActions.actions.Count;
-        int tmp = (counter++) % count;
-        if (tmp == 0)
+        if (obj.phase == InputActionPhase.Started && obj.action.activeControl.device == m_playerInputs.devices[0])
         {
             m_playerAction = obj.action;
-            playerInput = true;
         }
+    }
+
+    void EnableInputActionMap(InputActionMap inputActions)
+    {
+        //InputActionMap test = inputActions.Clone();
+        m_actionMap = new InputActionMap(PlayerMaps);
+        foreach (var action in inputActions.actions)
+        {
+            InputAction ia = m_actionMap.AddAction(action.name, action.type, null, action.interactions);
+            foreach (var bind in action.bindings)
+            {
+                ia.AddBinding(bind);
+            }
+        }
+        m_actionMap.Enable();
+        m_playerInputs.actions.AddActionMap(m_actionMap);
+        m_actionMap.actionTriggered += context => CheckAction(context);
+    }
+
+    void DisableInputActionMap()
+    {
+        m_actionMap.Disable();
+        m_playerInputs.actions.RemoveActionMap(m_actionMap);
+        m_actionMap.Dispose();
     }
 
     IEnumerator TryRepair(IRepairable repairable)
     {
-        //print("toto");
         m_repairing = true;
-        PlayerInput playerInputs = GetComponent<PlayerInput>();
-        //if (playerInputs.actions.actionMaps.Count > 0)
-        //{
-        //    playerInputs.actions.actionMaps[1].Disable();
-        //}
-        InputActionMap am = new InputActionMap("PossibleAction" + playerInputs.user.id);
-        playerInputs.actions.actionMaps[1].Disable();
-        playerInputs.actions.RemoveAction("PossibleAction" + playerInputs.user.id);
-        //try
-        //{
-        foreach (var item in repairable.possibleActions)
-            {
-                InputAction ac = am.AddAction(item.name, item.type);
-                foreach (var b in item.bindings)
-                {
-                    ac.AddBinding(b);
-                }
-            }
-            playerInputs.actions.AddActionMap(am);
-        //}
-        //catch (Exception)
-        //{
-        //    playerInputs.actions.actionMaps[1].Disable();
-        //    foreach (var item in repairable.possibleActions)
-        //    {
-        //        InputAction ac = am.AddAction(item.name, item.type);
-        //        foreach (var b in ac.bindings)
-        //        {
-        //            ac.AddBinding(b);
-        //        }
-        //    }
-        //    playerInputs.actions.AddActionMap(am);
-        //}
-        //InputActionMap actions = playerInputs.actions.actionMaps.Last();
-        am.Enable();
+        EnableInputActionMap(repairable.possibleActions);
         m_expectedAction = repairable.GetNextAction();
-        repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
-        am.actionTriggered += context => CheckAction(context);
+        repairable.SetImage(GetPlayerType(), m_expectedAction);
 
         bool finished = false;
-        playerInput = false;
         while (!finished)
         {
             float timeout = 0;
@@ -82,13 +73,12 @@ public class Repairer : MonoBehaviour
             {
                 yield return 0;
                 timeout += Time.deltaTime;
-                if (playerInput)
+                if (m_playerAction != null)
                 {
-                    playerInput = false;
                     timeout = 0;
-                    if (m_playerAction == m_expectedAction)
+                    if (m_playerAction.name == m_expectedAction.name)
                     {
-                        if (OnExpectedSuccess(repairable, playerInputs))
+                        if (OnExpectedSuccess(repairable))
                         {
                             finished = true;
                             break;
@@ -96,22 +86,21 @@ public class Repairer : MonoBehaviour
                     }
                     else
                     {
-                        OnExpectedFail(repairable, playerInputs);
+                        OnExpectedFail(repairable);
                     }
+                    m_playerAction = null;
                 }
             }
             if (!finished)
-                OnExpectedFail(repairable, playerInputs);
+                OnExpectedFail(repairable);
         }
-        am.Disable();
-        am.actionTriggered -= CheckAction;
-        playerInputs.actions.RemoveActionMap(am);
+        DisableInputActionMap();
         m_repairing = false;
     }
 
-    private int GetPlayerType(PlayerInput player)
+    private int GetPlayerType()
     {
-        foreach (var item in player.devices)
+        foreach (var item in m_playerInputs.devices)
         {
             if (item.wasUpdatedThisFrame)
             {
@@ -132,15 +121,15 @@ public class Repairer : MonoBehaviour
         return 0;
     }
 
-    void OnExpectedFail(IRepairable repairable, PlayerInput playerInputs)
+    void OnExpectedFail(IRepairable repairable)
     {
         repairable.CreateNewAction();
         m_expectedAction = repairable.GetNextAction();
-        repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
+        repairable.SetImage(GetPlayerType(), m_expectedAction);
         repairable.RepairFail();
     }
 
-    bool OnExpectedSuccess(IRepairable repairable, PlayerInput playerInputs)
+    bool OnExpectedSuccess(IRepairable repairable)
     {
         m_expectedAction = repairable.GetNextAction();
         repairable.SuccessRepair();
@@ -151,7 +140,7 @@ public class Repairer : MonoBehaviour
             return true;
         }
         else
-            repairable.SetImage(GetPlayerType(playerInputs), m_expectedAction);
+            repairable.SetImage(GetPlayerType(), m_expectedAction);
         return false;
     }
 
@@ -175,5 +164,11 @@ public class Repairer : MonoBehaviour
         {
             m_repairable = null;
         }
+    }
+
+    private void OnDisable()
+    {
+        m_actionMap.Disable();
+        m_playerInputs.actions.RemoveActionMap(m_actionMap);
     }
 }
