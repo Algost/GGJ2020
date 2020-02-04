@@ -14,11 +14,23 @@ public class Repairer : MonoBehaviour
 
     private PlayerInput m_playerInputs;
     private InputActionMap m_actionMap;
+    private InputActionMap m_defaultMap;
+
+    private int m_playerType = 2;
     public string PlayerMaps { get { return string.Format("RuntimeMaps_{0}", m_playerInputs.user.id); } }
     private void Start()
     {
         m_playerInputs = GetComponent<PlayerInput>();
         m_playerAction = null;
+        if (m_playerInputs.currentControlScheme == "Keyboard")
+            m_playerType = 2;
+        else if (m_playerInputs.currentControlScheme == "Gamepad")
+        {
+            if (m_playerInputs.devices[0].description.interfaceName == "XInput")
+                m_playerType = 0;
+            else
+                m_playerType = 1;
+        }
     }
 
     public void StartRepair(IRepairable repairable)
@@ -48,14 +60,18 @@ public class Repairer : MonoBehaviour
         }
         m_actionMap.Enable();
         m_playerInputs.actions.AddActionMap(m_actionMap);
+        m_defaultMap = m_playerInputs.currentActionMap;
+        m_playerInputs.SwitchCurrentActionMap(m_actionMap.name);
         m_actionMap.actionTriggered += context => CheckAction(context);
     }
 
     void DisableInputActionMap()
     {
+        m_playerInputs.SwitchCurrentActionMap(m_defaultMap.name);
         m_actionMap.Disable();
         m_playerInputs.actions.RemoveActionMap(m_actionMap);
-        m_actionMap.Dispose();
+        m_actionMap.actionTriggered -= context => CheckAction(context);
+        m_actionMap = null;
     }
 
     IEnumerator TryRepair(IRepairable repairable)
@@ -63,9 +79,10 @@ public class Repairer : MonoBehaviour
         m_repairing = true;
         EnableInputActionMap(repairable.possibleActions);
         m_expectedAction = repairable.GetNextAction();
-        repairable.SetImage(GetPlayerType(), m_expectedAction);
+        repairable.SetImage(m_playerType, m_expectedAction);
 
         bool finished = false;
+        m_playerAction = null;
         while (!finished)
         {
             float timeout = 0;
@@ -98,34 +115,34 @@ public class Repairer : MonoBehaviour
         m_repairing = false;
     }
 
-    private int GetPlayerType()
-    {
-        foreach (var item in m_playerInputs.devices)
-        {
-            if (item.wasUpdatedThisFrame)
-            {
-                if (item.description.interfaceName == "XInput")
-                {
-                    return 0;
-                }
-                else if (item.description.interfaceName == "HID")
-                {
-                    return 1;
-                }
-                else// if (item.description.deviceClass == "Keyboard")
-                {
-                    return 2;
-                }
-            }
-        }
-        return 0;
-    }
+    //private int GetPlayerType()
+    //{
+    //    foreach (var item in m_playerInputs.devices)
+    //    {
+    //        if (item.wasUpdatedThisFrame)
+    //        {
+    //            if (item.description.interfaceName == "XInput")
+    //            {
+    //                return 0;
+    //            }
+    //            else if (item.description.interfaceName == "HID")
+    //            {
+    //                return 1;
+    //            }
+    //            else// if (item.description.deviceClass == "Keyboard")
+    //            {
+    //                return 2;
+    //            }
+    //        }
+    //    }
+    //    return 0;
+    //}
 
     void OnExpectedFail(IRepairable repairable)
     {
         repairable.CreateNewAction();
         m_expectedAction = repairable.GetNextAction();
-        repairable.SetImage(GetPlayerType(), m_expectedAction);
+        repairable.SetImage(m_playerType, m_expectedAction);
         repairable.RepairFail();
     }
 
@@ -140,7 +157,7 @@ public class Repairer : MonoBehaviour
             return true;
         }
         else
-            repairable.SetImage(GetPlayerType(), m_expectedAction);
+            repairable.SetImage(m_playerType, m_expectedAction);
         return false;
     }
 
