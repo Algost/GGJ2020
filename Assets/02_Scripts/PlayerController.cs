@@ -10,12 +10,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     // Start is called before the first frame update
     private Vector3 m_movement;
-    private PlayerInput m_playerInput;
-
-    private void Start()
-    {
-        m_playerInput = GetComponent<PlayerInput>();
-        }
 
     private void FixedUpdate()
     {
@@ -25,10 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnMovement(InputValue inputValue)
     {
-        //if ()
-        //{
-            Vector2 vec = inputValue.Get<Vector2>();
-            m_movement = new Vector3(vec.x, transform.position.y, vec.y);
-        //}
+        Vector2 vec = inputValue.Get<Vector2>();
+        m_movement = new Vector3(vec.x, transform.position.y, vec.y);
     }
 }
