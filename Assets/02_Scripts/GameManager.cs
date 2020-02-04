@@ -42,6 +42,8 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
 
     public void restartScene()
     {
+        totalScore = 0;
+        GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
         SceneManager.LoadScene(2);
     }
 
