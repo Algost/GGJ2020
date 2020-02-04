@@ -1735,9 +1735,11 @@ MonoBehaviour:
     (Xbox) or "X" (Ps) near it
 
 
-    One player
+    1 to 4 player
 
-    Keyboard or controller'
+
+    Keyboard or controller (Xbox
+    / PS4)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6bd63a807e1177849a19fac0cda29fa5, type: 2}
   m_sharedMaterial: {fileID: 7094244982891213888, guid: 6bd63a807e1177849a19fac0cda29fa5,
@@ -1772,7 +1774,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 5
   m_textAlignment: 257
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1807,12 +1809,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -436.6853, w: -58.03888}
   m_textInfo:
     textComponent: {fileID: 2134196079}
-    characterCount: 206
+    characterCount: 223
     spriteCount: 0
-    spaceCount: 40
-    wordCount: 39
+    spaceCount: 46
+    wordCount: 43
     linkCount: 0
-    lineCount: 10
+    lineCount: 11
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
