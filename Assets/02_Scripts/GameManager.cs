@@ -20,6 +20,7 @@ public class GameManager : AGameManager<GameManager, GameManager.GameStates>
     public void Start()
     {
         Time.timeScale = 1.0f;
+        totalScore = 0;
         GameObject.Find("GUI/Canvas/scoreTxt").GetComponent<TextMeshProUGUI>().SetText(totalScore.ToString());
        GameObject.Find("GUI/Canvas/lifePointsTxt").GetComponent<TextMeshProUGUI>().SetText(fortressPoints.ToString());
     }
