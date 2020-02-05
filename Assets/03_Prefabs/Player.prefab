@@ -74,6 +74,10 @@ PrefabInstance:
       propertyPath: m_Animation
       value: 
       objectReference: {fileID: 7400000, guid: 00eea979619afad4589915f3499278cf, type: 3}
+    - target: {fileID: 515901699, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 515901701, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -134,6 +138,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d0137b1a610fd0345b2e16fe2577f936, type: 2}
+    - target: {fileID: 308549435003231687, guid: a1a4e056c0d7aca4589819c0b0a3f5ab,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4660b61e489bc88419aedc4523e221c0, type: 2}
     - target: {fileID: 3397385952222973110, guid: a1a4e056c0d7aca4589819c0b0a3f5ab,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -459,7 +468,8 @@ PrefabInstance:
       propertyPath: speed
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 515901699, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a1a4e056c0d7aca4589819c0b0a3f5ab, type: 3}
 --- !u!4 &8207839788638230519 stripped
 Transform:
